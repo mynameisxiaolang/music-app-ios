@@ -25,7 +25,6 @@ enum Fixtures {
         <h3 class="bili-video-card__info--tit" title="纯音乐直播">纯音乐直播</h3>
       </a>
     </div>
-    <img src="https://i0.hdslb.com/bfs/other/not-in-card.jpg" />
     """
 
     /// ranking/v2 接口返回(JSON,真实字段子集)

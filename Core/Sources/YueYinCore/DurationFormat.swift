@@ -1,3 +1,5 @@
+import Foundation
+
 /// 时长格式化(镜像 Android BiliRepository.formatDuration / parseDuration)
 public enum DurationFormat {
     /// 秒 -> "06:12" / "1:03:41";<=0 返回空串
