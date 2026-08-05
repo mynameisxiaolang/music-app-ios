@@ -1,0 +1,11 @@
+# Xcode 生成物(xcodeproj 由 XcodeGen 生成,不提交)
+YueYin.xcodeproj/
+build/
+DerivedData/
+*.xcuserstate
+.DS_Store
+# Swift Package 生成物
+Core/.build/
+Core/.swiftpm/
+# SDD 工作区(ledger/briefs/reports)
+.superpowers/

@@ -1,0 +1,52 @@
+name: YueYin
+options:
+  bundleIdPrefix: com.yueyin
+  deploymentTarget:
+    iOS: "15.0"
+  createIntermediateGroups: true
+packages:
+  YueYinCore:
+    path: Core
+targets:
+  YueYin:
+    type: application
+    platform: iOS
+    sources: [YueYin]
+    dependencies:
+      - package: YueYinCore
+    info:
+      path: YueYin/Info.plist
+      properties:
+        CFBundleDisplayName: 悦音音乐
+        UIBackgroundModes: [audio]
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.yueyin.music
+        SWIFT_VERSION: "5.9"
+        TARGETED_DEVICE_FAMILY: "1"
+        CODE_SIGNING_ALLOWED: "NO"
+  YueYinTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [YueYinTests]
+    dependencies:
+      - target: YueYin
+      - package: YueYinCore
+    settings:
+      base:
+        SWIFT_VERSION: "5.9"
+        CODE_SIGNING_ALLOWED: "NO"
+schemes:
+  YueYin:
+    build:
+      targets:
+        YueYin: all
+    run:
+      config: Debug
+    test:
+      targets:
+        - YueYinTests
