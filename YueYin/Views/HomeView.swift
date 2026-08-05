@@ -26,7 +26,7 @@ struct HomeView: View {
                     .listStyle(.plain)
                 }
             }
-            .navigationTitle("悦音音乐")
+            .navigationTitle("伟大音乐")
             .refreshable { await load() }
         }
         .task { await load() }

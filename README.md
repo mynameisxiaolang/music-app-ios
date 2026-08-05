@@ -1,4 +1,4 @@
-# 悦音音乐 iOS(iPhone 越狱版)
+# 伟大音乐 iOS(iPhone 越狱版)
 
 Android 版「悦音音乐」的 iOS 移植(原生 SwiftUI,功能全对齐规划中)。
 纯 B 站数据源:搜索/热门/音频流播放,无服务器。
@@ -22,7 +22,7 @@ Android 版「悦音音乐」的 iOS 移植(原生 SwiftUI,功能全对齐规划
 
 1. 手机装好 **AppSync Unified**(Sileo 搜索安装)与 **Filza**
 2. 隔空投送/浏览器下载 `YueYin.ipa`
-3. Filza 打开 ipa → 安装 → 桌面出现「悦音音乐」
+3. Filza 打开 ipa → 安装 → 桌面出现「伟大音乐」
 
 无越狱 Plan B:Sideloadly + 免费 Apple ID 侧载(每 7 天需重签)。
 

@@ -11,7 +11,7 @@ final class NowPlayingCenter {
         var info: [String: Any] = [:]
         if let song {
             info[MPMediaItemPropertyTitle] = song.name
-            info[MPMediaItemPropertyArtist] = song.artist.isEmpty ? "悦音音乐" : song.artist
+            info[MPMediaItemPropertyArtist] = song.artist.isEmpty ? "伟大音乐" : song.artist
         }
         info[MPNowPlayingInfoPropertyElapsedPlaybackTime] = time
         info[MPMediaItemPropertyPlaybackDuration] = duration

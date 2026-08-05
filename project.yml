@@ -19,7 +19,7 @@ targets:
     info:
       path: YueYin/Info.plist
       properties:
-        CFBundleDisplayName: 悦音音乐
+        CFBundleDisplayName: 伟大音乐
         UIBackgroundModes: [audio]
         NSAppTransportSecurity:
           NSAllowsLocalNetworking: true
