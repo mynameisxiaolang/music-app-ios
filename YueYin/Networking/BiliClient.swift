@@ -44,7 +44,7 @@ struct BiliClient {
         do {
             let (data, resp) = try await session.data(for: makeRequest(url))
             guard isOK(resp) else { return [] }
-            return Array(BiliJSONParsers.parseRanking(data).prefix(limit))
+            return Array(BiliJSONParsers.parseRanking(data).prefix(max(0, limit)))
         } catch {
             return []
         }

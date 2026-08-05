@@ -10,14 +10,17 @@ struct HomeView: View {
             Group {
                 if loading {
                     ProgressView("加载中…")
-                } else if videos.isEmpty {
-                    Text("加载失败,下拉重试")
-                        .foregroundColor(.secondary)
                 } else {
                     List {
-                        ForEach(videos) { v in
-                            SongRow(song: Song.fromVideo(v))
-                                .onTapGesture { play(v) }
+                        if videos.isEmpty {
+                            Text("加载失败,下拉重试")
+                                .foregroundColor(.secondary)
+                                .frame(maxWidth: .infinity)
+                        } else {
+                            ForEach(videos) { v in
+                                SongRow(song: Song.fromVideo(v))
+                                    .onTapGesture { play(v) }
+                            }
                         }
                     }
                     .listStyle(.plain)
@@ -30,6 +33,7 @@ struct HomeView: View {
     }
 
     private func load() async {
+        loading = true
         videos = await BiliClient.shared.hotMusic()
         loading = false
     }

@@ -1,4 +1,5 @@
 import XCTest
+import YueYinCore
 @testable import YueYin
 
 final class PlayerCoreTests: XCTestCase {

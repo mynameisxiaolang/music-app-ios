@@ -35,7 +35,8 @@ final class PlayerCore: ObservableObject {
         ) { [weak self] time in
             guard let self else { return }
             self.currentTime = time.seconds
-            self.duration = self.player.currentItem?.duration.seconds ?? 0
+            let d = self.player.currentItem?.duration.seconds ?? 0
+            self.duration = d.isFinite ? d : 0
             self.nowPlaying.update(
                 song: self.currentSong,
                 isPlaying: self.isPlaying,
@@ -67,7 +68,8 @@ final class PlayerCore: ObservableObject {
             player.pause()
             isPlaying = false
         } else {
-            player.play()
+            guard player.currentItem != nil else { return }
+            resumePlayback()
             isPlaying = true
         }
         nowPlaying.update(song: currentSong, isPlaying: isPlaying, time: currentTime, duration: duration)
@@ -114,6 +116,11 @@ final class PlayerCore: ObservableObject {
 
     // MARK: - private
 
+    private func resumePlayback() {
+        player.play()
+        if speed != 1 { player.rate = speed }
+    }
+
     private func playCurrent() {
         guard let song = currentSong else { return }
         loadGeneration += 1
@@ -129,10 +136,10 @@ final class PlayerCore: ObservableObject {
             guard gen == loadGeneration else { return }  // 过期加载丢弃(竞态保护)
             let item = AVPlayerItem(url: url)
             player.replaceCurrentItem(with: item)
-            player.play()
-            if speed != 1 { player.rate = speed }
+            resumePlayback()
             isPlaying = true
             currentTime = 0
+            duration = 0
             nowPlaying.update(song: song, isPlaying: true, time: 0, duration: 0)
         }
     }
@@ -140,7 +147,7 @@ final class PlayerCore: ObservableObject {
     private func advanceAfterEnd() {
         if mode == .repeatOne {
             player.seek(to: .zero)
-            player.play()
+            resumePlayback()
             return
         }
         guard let i = currentIndex,
@@ -148,7 +155,7 @@ final class PlayerCore: ObservableObject {
         else { return }
         if target == i {
             player.seek(to: .zero)
-            player.play()
+            resumePlayback()
             return
         }
         currentIndex = target
