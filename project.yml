@@ -4,6 +4,8 @@ options:
   deploymentTarget:
     iOS: "15.0"
   createIntermediateGroups: true
+  # 最新 XcodeGen 默认生成 Xcode 16 工程格式(77),macos-14 runner 的 Xcode 15.4 读不了 —— 固定为 15 格式
+  xcodeVersion: "15.0"
 packages:
   YueYinCore:
     path: Core
