@@ -32,7 +32,7 @@ private struct CoverImageInternal: View {
                     .scaledToFill()
             }
         }
-        .task { image = await CoverLoader.shared.load(url) }
+        .task(id: url) { image = await CoverLoader.shared.load(url) }
     }
 }
 
