@@ -79,14 +79,14 @@ final class PlayerCore: ObservableObject {
         guard let i = currentIndex,
               let target = QueueLogic.userNextIndex(current: i, count: queue.count, mode: mode, shuffled: shuffled)
         else { return }
-        jump(to: target)
+        jumpTo(target)
     }
 
     func previous() {
         guard let i = currentIndex,
               let target = QueueLogic.userPreviousIndex(current: i, count: queue.count, mode: mode, shuffled: shuffled)
         else { return }
-        jump(to: target)
+        jumpTo(target)
     }
 
     func seek(to time: TimeInterval) {
