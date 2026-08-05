@@ -22,6 +22,7 @@ final class PlayerCore: ObservableObject {
 
     private let player = AVPlayer()
     private var timeObserver: Any?
+    private var loadGeneration = 0
     private let nowPlaying = NowPlayingCenter()
 
     private init() {
@@ -94,7 +95,6 @@ final class PlayerCore: ObservableObject {
 
     func setSpeed(_ s: Float) {
         speed = s
-        player.defaultRate = s
         if isPlaying { player.rate = s }
     }
 
@@ -116,6 +116,8 @@ final class PlayerCore: ObservableObject {
 
     private func playCurrent() {
         guard let song = currentSong else { return }
+        loadGeneration += 1
+        let gen = loadGeneration
         Task { @MainActor in
             let url: URL?
             if song.isLocal, let p = song.localPath {
@@ -124,10 +126,11 @@ final class PlayerCore: ObservableObject {
                 url = await BiliClient.shared.audioStreamURL(bvid: song.bvid)
             }
             guard let url else { return }  // 解析失败静默(容错,后续可加提示)
+            guard gen == loadGeneration else { return }  // 过期加载丢弃(竞态保护)
             let item = AVPlayerItem(url: url)
             player.replaceCurrentItem(with: item)
-            player.defaultRate = speed
             player.play()
+            if speed != 1 { player.rate = speed }
             isPlaying = true
             currentTime = 0
             nowPlaying.update(song: song, isPlaying: true, time: 0, duration: 0)
